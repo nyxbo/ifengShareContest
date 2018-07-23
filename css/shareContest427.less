@@ -1,0 +1,204 @@
+html,body,div,img,span,p{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  height: 100%;
+}
+img{
+  display: block;
+}
+.clearfix::after{
+  display: block;
+  height: 0;
+  content: '';
+  clear: both;
+}
+.box{
+  position: relative;
+  background:  #e03927 url("http://p1.ifengimg.com/d27607d14a52d158/2018/16/bg.png") no-repeat top left;
+  -webkit-background-size: contain;
+  background-size: contain;
+  width: 100%;
+  min-height: 100%;
+  overflow: scroll;
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
+  //justify-content:center;
+  .txt{
+    //margin-top: .9rem;
+    margin: .9rem auto 0;
+    width: 5.43rem;
+  }
+  .banner{
+    //margin-top: .3rem;
+    margin: .3rem auto 0;
+    width: 6.9rem;
+  }
+  .btn{
+    margin:0 auto;
+    position: relative;
+    z-index: 1;
+    width: 5.87rem;
+    top: -.52rem;
+    //top: -.75rem;
+    //left: -.32rem;
+  }
+  .icon{
+    position: relative;
+    z-index: 1;
+    top: -1.52rem;
+    left: .21rem;
+    width: 1.82rem;
+  }
+  .container{
+    margin: .48rem auto 0;
+    position: relative;
+    top: -2.67rem;
+    width: 6.92rem;
+    //height: 6.19rem;
+    //overflow: scroll;
+    background-color: #fff;
+    -webkit-border-radius: .3rem;
+    -moz-border-radius: .3rem;
+    border-radius: .3rem;
+    .no-login,.no-bound{
+      padding: .84rem 0 .70rem;
+      width: 100%;
+      height: 100%;
+      //display: flex;
+      //flex-direction: column;
+      //align-items: center;
+      //justify-content: center;
+      img{
+        //margin-top: .84rem;
+        margin: 0 auto;
+        width: 3.56rem;
+      }
+      p{
+        margin: .45rem 0;
+        font-size: .36rem;
+        font-family: PingFang-SC-Medium;
+        text-align: center;
+      }
+      div{
+        margin: 0 auto;
+        //display: flex;
+        //justify-content: center;
+        //align-items: center;
+        //margin-bottom: .71rem;
+        width: 3.16rem;
+        //height: .66rem;
+        line-height: .7rem;
+        background-color: #fff;
+        color: #f54343;
+        font-family: PingFang-SC;
+        font-weight: bold;
+        font-size: .36rem;
+        text-align: center;
+        border: .02rem solid #f54343;
+        -webkit-border-radius: .66rem;
+        -moz-border-radius: .66rem;
+        border-radius: .66rem;
+      }
+    }
+    .no-seven{
+      width: 100%;
+      height: 100%;
+      //display: flex;
+      //flex-direction: column;
+      //align-items: center;
+      //justify-content: center;
+      p{
+        font-size: .36rem;
+        font-family: PingFang-SC-Medium;
+        text-align: center;
+        span{
+          color: #f54343;
+        }
+        .seven-num{
+          display: inline-block;
+          margin-top: .45rem;
+          font-size:.72rem;
+          font-weight: bold;
+        }
+      }
+    }
+    .share-flow{
+      padding-top: .48rem;
+      span{
+        font-size: .28rem;
+      }
+      .share-top{
+        //display: flex;
+        //justify-content: space-between;
+        //align-items: center;
+        font-size: .36rem;
+        margin: 0 .35rem .48rem;
+        img{
+          float: right;
+          width: 2.29rem;
+          height: .57rem;
+        }
+      }
+      .share-item{
+        //display: flex;
+        margin: 0 .35rem;
+        height: 1.69rem;
+        .share-item-left{
+          float: left;
+          position: relative;
+          width: .34rem;
+          height: .34rem;
+          //border: .02rem solid #ececec;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          //display: flex;
+          //justify-content: center;
+          //align-items: center;
+          .circle{
+            width: .34rem;
+            height: .34rem;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+          }
+          .share-line{
+            position: absolute;
+            z-index: 10;
+            top:.09rem;
+            //left: .19rem;
+            //width: .01rem;
+            height: 1.69rem;
+            background-color: #e54129;
+          }
+        }
+        .share-item-right{
+          float: left;
+          margin-left: .48rem;
+          //flex: 1;
+          .date{
+            //display: flex;
+            //justify-content: space-between;
+            font-size: .28rem;
+            .read,.read-num{
+              color: #ec0000;
+            }
+            .read{
+              margin-right: .20rem;
+            }
+            .read-num{
+              margin-right: .10rem;
+            }
+          }
+          .title{
+            margin-top: .15rem;
+            font-size: .28rem;
+          }
+        }
+      }
+    }
+  }
+}

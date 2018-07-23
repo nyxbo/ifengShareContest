@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" name="viewport">
+    <title>分享竞赛</title>
+    <!--<link rel="stylesheet" href="css/shareContest427.css">-->
+    <!--<link rel="stylesheet" href="http://p2.ifengimg.com/d27607d14a52d158/2018/16/shareContest2.css">-->
+    <link rel="stylesheet" href="http://p2.ifengimg.com/d27607d14a52d158/2018/17/shareContest427.css">
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+        .hide{
+            display: none;
+        }
+    </style>
+    <script>
+        (function(doc, win) {
+            var _root = doc.documentElement,
+                resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                resizeCallback = function() {
+                    var clientWidth = _root.clientWidth,
+                        fontSize = 10 * 10;
+                    if(!clientWidth) return;
+                    if(clientWidth < 1080) {
+                        fontSize = 100 * (clientWidth / 750);
+                    } else {
+                        fontSize = 100 * (1080 / 750);
+                    }
+                    _root.style.fontSize = fontSize + 'px';
+                };
+            if(!doc.addEventListener) return;
+            win.addEventListener(resizeEvent, resizeCallback, false);
+            doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+        })(document, window);
+    </script>
+    <!--<script src="https://p3.ifengimg.com/a80c2beeeff78280/2017/50/eruda.js"></script>
+    <script>
+        eruda.init()
+    </script>-->
+
+</head>
+<body>
+<div class="box">
+    <img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/txt.png" alt="" class="txt" style="width: 6.9rem;">
+    <img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/banner.png" alt="" class="banner">
+    <!--<img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/btn.png" alt="" class="btn" id="golist" @click="goList">-->
+    <img src="http://p2.ifengimg.com/d27607d14a52d158/2018/17/btn1.png" alt="" class="btn" id="golist" @click="goList">
+    <img src="http://p2.ifengimg.com/d27607d14a52d158/2018/17/btn0.png" alt="" class="icon">
+    <div class="container"><!-- style="top: -1.89rem;"-->
+        <div class="no-login" v-show="nologin">
+            <img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/login.png" alt="">
+            <p>登录并绑定手机号可<br>查看您的分享轨迹</p>
+            <div @click="window.grounds.getDeviceInfo().getOs().match(/android/) ? window.ground.userLogin() : window.grounds.login()"><span style='line-height: .7rem;'>登录</span></div>
+        </div>
+        <div class="no-bound" v-show="nobind">
+            <img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/bound.png" alt="">
+            <p>登录并绑定手机号可<br>查看您的分享轨迹</p>
+            <div @click="window.grounds.userBind();"><span>绑定</span></div>
+        </div>
+        <div class="no-seven" v-show="noseven && isbind">
+            <p style="padding-top: 2.30rem;">昨日每人通过分享挣到</p>
+            <p style="margin-bottom: 2.50rem;"><span class="seven-num">3650</span><span>金币</span></p>
+        </div>
+        <div class="share-flow" v-show="hasshare && isbind">
+            <div class="share-top" style="line-height: .57rem">
+                我的分享轨迹
+                <img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/winner.png" alt="">
+            </div>
+            <div class="share-item clearfix" v-for="(item,index) in list" v-cloak>
+                <div class="share-item-left">
+                    <img src="http://p1.ifengimg.com/d27607d14a52d158/2018/16/circle.png" alt="" class="circle">
+                    <div class="share-line" v-if="!(index == data.length-1)" style="left: .16rem;"></div>
+                </div>
+                <div class="share-item-right" style="width: 5.30rem;">
+                    <div class="date clearfix">
+                        <div style="float: left;">
+                            <span>${getDay(index)}</span>
+                            <!--<span>${item.time}</span>-->
+                            <span style="margin-left: .35rem;">${getTime(index)}</span>
+                        </div>
+                        <div style="float: right;">
+                            <span class="read">阅读</span>
+                            <span class="read-num">${item.num}</span>
+                        </div>
+                    </div>
+                    <!--<p class="title">小仙女秒变霸气女王！苏诗丁犀利改编贼攻气十足</p>-->
+                    <p class="title">${item.title}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="http://p0.ifengimg.com/d27607d14a52d158/2018/13/jquery-3.2.1.min.js"></script>
+<script src="http://p0.ifengimg.com/d27607d14a52d158/2018/13/vue.min.js"></script>
+<script>
+    $('.share-line').css({'width':'1px'});
+
+    var getUserInfo = window.ground?window.ground.getUserInfo():'';
+    var deviceInfo = window.ground?window.ground.getDeviceInfo():'';
+    var guid = getUserInfo?getUserInfo.getGuid():'';
+    var deviceid = deviceInfo?deviceInfo.getDeviceId():'';
+    var token = getUserInfo?getUserInfo.getToken():'';
+    var os = deviceInfo?deviceInfo.getOs():'ios_9.0.2';
+
+    var vm = new Vue({
+        el: '.box',
+        delimiters: ['${','}'],
+        data:{
+            nologin: false,
+            nobind: false,
+            noseven: false,
+            hasshare: false,
+            isbind: false,
+            list: [],
+            active : 0,
+            date : '',
+            data:[]
+        },
+        mounted:function () {
+
+
+            this.getData();
+//            console.log(this.data);
+
+//            if(window.grounds){   //判断登录
+//                let token = window.grounds.userIsLogin();
+//                if(!token){ //未登录
+//                    this.nologin = true;
+//                    if(window.grounds.getDeviceInfo().getOs().match(/android/)){
+//                        window.grounds.userLogin();
+//                    }else{
+//                        window.grounds.login();
+//                    }
+//                }
+//            }
+            if(window.grounds){  //判断绑定
+                window.grounds.setShareVisibility(false); //取消分享按钮
+                if (!window.ground.userIsLogin()) {
+                    this.nologin = true;
+                    this.nobind = false;
+//                    window.ground.userLogin();
+                }
+//                else if(this.isbind){
+//                    this.nologin = false;
+//                    this.nobind = false;
+//                }
+                else{
+                    this.isPhone();
+                    this.nologin = false;
+//                    this.nobind = true;
+                }
+//                    window.grounds.userBind();
+
+            }
+        },
+        created:function(){
+
+
+//            this.isPhone();
+        },
+//        updated:function(){
+//            if(this.isbind){
+//                this.nobind = false;
+//            }
+//        },
+        methods:{
+            getData:function () {
+                $.ajax({
+                    dataType: 'jsonp',
+                    type: 'GET',
+                    url: 'https://user.iclient.ifeng.com/User_Newcredit_Creditplan/shareDocsNew',
+                    data:{
+                        'deviceid' : deviceid,
+                        'os': os,
+                        'guid': guid,
+                        'token': token
+                    },
+//                    url:'http://10.21.6.102:8998/User_Newcredit_Creditplan/shareDocsNew?deviceid=jinze',
+                    success:function(res) {
+                        //alert('成功');
+                        //console.log(res);
+                        if(res.data.length == 0 || res.data == null){
+                            this.noseven = true;
+                            this.hasshare = false;
+                        }else {
+                            this.data = res.data;
+                            this.timeSort();
+                            this.noseven = false;
+                            this.hasshare = true;
+                        }
+//                        var a = res.data[0].time;
+//                        console.log(this.timestampToTime(a));
+                    }.bind(this),
+                    error:function (error) {
+                        //alert(error.code);
+                    }
+                })
+            },
+            isPhone:function(){ //判断是否绑定手机号
+                $.ajax({
+                    type: 'GET',
+//                    data:{
+//                        'guid' : guid
+//                    },
+                    dataType: 'jsonp',
+//                    url: 'https://user.iclient.ifeng.com/Api_User_Info/checkuserphone?guid=47918059',
+                    url: 'https://user.iclient.ifeng.com/Api_User_Info/checkuserphone?guid='+ guid,
+                    success:function(res){
+                        this.isbind= res.data;
+//                        alert(this.isbind);
+                        if(this.isbind){
+                            this.nobind= false;
+//                            alert(this.nobind);
+                        }else{
+                            this.nobind= true;
+//                            alert(this.nobind);
+                        }
+                    }.bind(this)
+                })
+            },
+            getDay:function (index) {  //获取日期
+                var date = this.list[index].time.split(' ');
+                date = date[0].split('-');
+                var nowDate = date[1] + '月' + date[2] + '日';
+                return nowDate;
+            },
+            getTime:function(index){ //获取时间
+                var time = this.list[index].time.split(' ');
+                time = time[1].split(':');
+                var nowTime = time[0] + ':' + time[1];
+                return nowTime;
+            },
+            timeSort:function(){ // 处理时间排序
+                for(var i=0;i<this.data.length;i++){
+                    var newTime = this.data[i].time.toString();
+//                        .replace(/\+/g,' ');
+                    this.list.push({'num':this.data[i].num,'time':this.timestampToTime(newTime),'title':this.data[i].title});
+                    JSON.stringify(this.list);
+                }
+                var rows = this.list;
+                rows.sort(function(a,b){
+                    return Date.parse(b.time) - Date.parse(a.time);//时间倒序
+                });
+                //console.log(rows);
+            },
+            timestampToTime:function(timestamp) {  //时间戳转换为时间
+                var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                Y = date.getFullYear() + '-';
+                M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+                D = date.getDate() + ' ';
+                h = (date.getHours() <10 ? '0' + (date.getHours()) : date.getHours())+ ':';
+                m = (date.getMinutes() < 10 ? '0' + (date.getMinutes()) : date.getMinutes() ) + ':';
+                s = date.getSeconds();
+                return Y+M+D+h+m+s;
+            },
+            goList:function(){
+                window.ground.dispatch('channelList', 'clrclehot', '', '', '');
+            },
+            getList:function(){
+                window.location.href= 'https://www.baidu.com'
+            }
+        }
+    })
+</script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="https://p3.ifengimg.com/a/2016/1021/shareweixin_20161021.js"></script>
+<!--<script>
+    var sharetitle = '#集凤凰令#山无棱，天地合，也要送张凤凰令！',sharelink = 'https://share.iclient.ifeng.com/fhlshare',shareimgUrl = 'https://p1.ifengimg.com/29b92e35b2b20708/2017/51/ifengLogo300x300.jpg',sharedesc = '-凤凰新闻',shareTimeline = '#集凤凰令#山无棱，天地合，也要送张凤凰令！';
+    wx.config({
+        debug: false,
+        appId: "<?php echo $signPackage['appId'];?>",
+        timestamp: "<?php echo $signPackage['timestamp'];?>",
+        nonceStr: "<?php echo $signPackage['nonceStr'];?>",
+        signature: "<?php echo $signPackage['signature'];?>",
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo'
+            // 所有要调用的 API 都要加到这个列表中
+        ]
+    });
+    weixinshare();
+
+</script>-->
+
+</body>
+</html>​

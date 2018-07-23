@@ -1,0 +1,178 @@
+html,
+body,
+div,
+img,
+span,
+p {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+img {
+  display: block;
+}
+.clearfix::after {
+  display: block;
+  height: 0;
+  content: '';
+  clear: both;
+}
+.box {
+  position: relative;
+  background: #e03927 url("http://p1.ifengimg.com/d27607d14a52d158/2018/16/bg.png") no-repeat top left;
+  -webkit-background-size: contain;
+  background-size: contain;
+  width: 100%;
+  min-height: 100%;
+  overflow: scroll;
+}
+.box .txt {
+  margin: .9rem auto 0;
+  width: 5.43rem;
+}
+.box .banner {
+  margin: .3rem auto 0;
+  width: 6.9rem;
+}
+.box .btn {
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  width: 5.87rem;
+  top: -0.52rem;
+}
+.box .icon {
+  position: relative;
+  z-index: 1;
+  top: -1.52rem;
+  left: .21rem;
+  width: 1.82rem;
+}
+.box .container {
+  margin: .48rem auto 0;
+  position: relative;
+  top: -2.67rem;
+  width: 6.92rem;
+  background-color: #fff;
+  -webkit-border-radius: .3rem;
+  -moz-border-radius: .3rem;
+  border-radius: .3rem;
+}
+.box .container .no-login,
+.box .container .no-bound {
+  padding: .84rem 0 .70rem;
+  width: 100%;
+  height: 100%;
+}
+.box .container .no-login img,
+.box .container .no-bound img {
+  margin: 0 auto;
+  width: 3.56rem;
+}
+.box .container .no-login p,
+.box .container .no-bound p {
+  margin: .45rem 0;
+  font-size: .36rem;
+  font-family: PingFang-SC-Medium;
+  text-align: center;
+}
+.box .container .no-login div,
+.box .container .no-bound div {
+  margin: 0 auto;
+  width: 3.16rem;
+  line-height: .7rem;
+  background-color: #fff;
+  color: #f54343;
+  font-family: PingFang-SC;
+  font-weight: bold;
+  font-size: .36rem;
+  text-align: center;
+  border: .02rem solid #f54343;
+  -webkit-border-radius: .66rem;
+  -moz-border-radius: .66rem;
+  border-radius: .66rem;
+}
+.box .container .no-seven {
+  width: 100%;
+  height: 100%;
+}
+.box .container .no-seven p {
+  font-size: .36rem;
+  font-family: PingFang-SC-Medium;
+  text-align: center;
+}
+.box .container .no-seven p span {
+  color: #f54343;
+}
+.box .container .no-seven p .seven-num {
+  display: inline-block;
+  margin-top: .45rem;
+  font-size: .72rem;
+  font-weight: bold;
+}
+.box .container .share-flow {
+  padding-top: .48rem;
+}
+.box .container .share-flow span {
+  font-size: .28rem;
+}
+.box .container .share-flow .share-top {
+  font-size: .36rem;
+  margin: 0 .35rem .48rem;
+}
+.box .container .share-flow .share-top img {
+  float: right;
+  width: 2.29rem;
+  height: .57rem;
+}
+.box .container .share-flow .share-item {
+  margin: 0 .35rem;
+  height: 1.69rem;
+}
+.box .container .share-flow .share-item .share-item-left {
+  float: left;
+  position: relative;
+  width: .34rem;
+  height: .34rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.box .container .share-flow .share-item .share-item-left .circle {
+  width: .34rem;
+  height: .34rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+.box .container .share-flow .share-item .share-item-left .share-line {
+  position: absolute;
+  z-index: 10;
+  top: .09rem;
+  height: 1.69rem;
+  background-color: #e54129;
+}
+.box .container .share-flow .share-item .share-item-right {
+  float: left;
+  margin-left: .48rem;
+}
+.box .container .share-flow .share-item .share-item-right .date {
+  font-size: .28rem;
+}
+.box .container .share-flow .share-item .share-item-right .date .read,
+.box .container .share-flow .share-item .share-item-right .date .read-num {
+  color: #ec0000;
+}
+.box .container .share-flow .share-item .share-item-right .date .read {
+  margin-right: .20rem;
+}
+.box .container .share-flow .share-item .share-item-right .date .read-num {
+  margin-right: .10rem;
+}
+.box .container .share-flow .share-item .share-item-right .title {
+  margin-top: .15rem;
+  font-size: .28rem;
+}
